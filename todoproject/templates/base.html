@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+  </head>
+  <body>
+    <h1>TO DO</h1>
+    <ul>
+      {% for todo_item in todo %}
+      <li>
+        {{todo_item.item}}
+        <form
+          action="/deleteTodo/{{todo_item.id}}"
+          style="display: inline"
+          method="POST"
+        >
+          {% csrf_token %}
+          <input type="submit" value="Delete" />
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <form action="/addTodo/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="todoItem" id="" required />
+      <input type="submit" value="Add" />
+      <br>
+      <br>
+      <hr>
+      <br>
+      <h2>Contact Us</h2>
+    </form>
+
+    <form action="/contact/" method="POST">
+      {% csrf_token %}
+      <input type="email" name="email" id="" placeholder='E-Mail' required />
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <input type="text" name="msg" placeholder = 'Message' id="">
+      <br>
+      <br>
+      <input type="submit" value="Send">
+    </form>
+  </body>
+</html>
